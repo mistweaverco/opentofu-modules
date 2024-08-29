@@ -1,0 +1,19 @@
+---
+name: Checker 😎
+
+on: [pull_request, push]
+
+jobs:
+  pr-checker:
+    name: Checker 😎
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout & Setup Tofu
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.8.1
+      - name: Check if tofu files are correctly formatted
+        run: ./scripts/check-tofu-format.sh
